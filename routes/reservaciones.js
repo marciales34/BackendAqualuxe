@@ -5,7 +5,7 @@ const router = express.Router();
 // Registrar una nueva reservación
 router.post("/registrar", async (req, res) => {
   try {
-    const { fecha, hora, servicio_id, vehiculo_id, usuario_id, autolavado } = req.body;
+    const { fecha, hora, servicio_id, vehiculo_id, usuario_id, autolavado_id } = req.body;
 
     // Validación de campos
     if (!fecha || !hora || !servicio_id || !vehiculo_id || !usuario_id || !autolavado) {
@@ -19,7 +19,7 @@ router.post("/registrar", async (req, res) => {
       servicio_id,
       vehiculo_id,
       usuario_id,
-      autolavado,
+      autolavado_id,
     });
 
     res.status(201).json({

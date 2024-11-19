@@ -43,8 +43,12 @@ Reservacion.init(
       },
       allowNull: false,
     },
-    autolavado: {
-      type: DataTypes.STRING,
+    autolavado_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'autolavados',
+        key: 'id_autolavados',
+      },
       allowNull: false,
     },
   },
