@@ -5,6 +5,10 @@ const cors = require("cors");
 const sequelize = require("./database");
 
 const usuariosRoutes = require("./routes/usuarios"); // Asegúrate de que la ruta sea correcta
+const reservacionesRoutes = require("./routes/reservaciones");
+const vehiculosRoutes = require("./routes/vehiculos");
+const path = require('path');
+
 
 
 const app = express();
@@ -22,8 +26,12 @@ sequelize.sync()
     console.error("Error al conectar con la base de datos:", err);
   });
 
-// Usar las rutas
+// Servir archivos estáticos desde la carpeta uploads
+// Suponiendo que las imágenes se guardan en el directorio 'uploads'
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/usuarios", usuariosRoutes); // Asegúrate de que usuariosRoutes sea un router válido
+app.use("/reservaciones", reservacionesRoutes);
+app.use("/vehiculos", vehiculosRoutes); // Ruta para reservaciones
 
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);

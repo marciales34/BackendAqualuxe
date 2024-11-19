@@ -6,40 +6,53 @@ class Reservacion extends Model {}
 
 Reservacion.init(
   {
-    id_reservaciones: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    fecha_reservacion: {
+    fecha: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    hora_reservacion: {
+    hora: {
       type: DataTypes.TIME,
       allowNull: false,
     },
-    id_servicios: {
+    servicio_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'servicios',
-        key: 'id_servicios',
+        key: 'id',
       },
       allowNull: false,
     },
-    id_usuarios: {
+    vehiculo_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'vehiculos',
+        key: 'id',
+      },
+      allowNull: false,
+    },
+    usuario_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'usuarios',
-        key: 'id_usuarios',
+        key: 'id',
       },
+      allowNull: false,
+    },
+    autolavado: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
     sequelize,
+    timestamps: false,
     modelName: "Reservacion",
-    tableName: "reservaciones",
+    tableName: "reservas",
   }
 );
 

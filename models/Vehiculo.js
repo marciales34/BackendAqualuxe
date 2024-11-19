@@ -6,7 +6,7 @@ class Vehiculo extends Model {}
 
 Vehiculo.init(
   {
-    id_vehiculos: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -33,20 +33,21 @@ Vehiculo.init(
       allowNull: false,
     },
     imagen: {
-      type: DataTypes.STRING, // Aquí se almacena la ruta de la imagen
-      allowNull: true,
+      type: DataTypes.STRING, // BLOB para imagenes, puede cambiarse si lo necesitas
+      allowNull: false, // Ahora no permite NULL
     },
-    id_usuarios: {
+    usuario_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'usuarios',
-        key: 'id_usuarios',
+        key: 'id',
       },
-      allowNull: false,
+      allowNull: false, // Ahora no permite NULL
     },
   },
   {
     sequelize,
+    timestamps: false,
     modelName: "Vehiculo",
     tableName: "vehiculos",
   }
