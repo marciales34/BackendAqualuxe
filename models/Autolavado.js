@@ -1,43 +1,34 @@
-// models/Trabajador.js
+// models/Reservacion.js
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../database");
 
-class Trabajador extends Model {}
+class Autolavado extends Model {}
 
-Trabajador.init(
+Autolavado.init(
   {
-    id_trabajadores: {
+    id_autolavado: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    nombre: {
+    nombre_autolavado: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    correo: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    ciudad: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    telefono: {
+    horario: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     direccion: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   },
   {
     sequelize,
-    modelName: "Trabajador",
-    tableName: "trabajadores",
+    modelName: "Autolavado",
+    tableName: "autolavados",
   }
 );
 
-module.exports = Trabajador;
+module.exports = Autolavado;
