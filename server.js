@@ -36,7 +36,6 @@ app.use("/usuarios", usuariosRoutes);
 app.use("/reservaciones", reservacionesRoutes);
 app.use("/reserva", resrvaRoutes);
 app.use("/vehiculos", vehiculosRoutes); 
-app.use("/usuarios", usuariosRoutes);
 app.use("/autolavados", autolavadosRoutes); // Asegúrate de que usuariosRoutes sea un router válido
 app.use("/servicios", servicioRoutes);
 
