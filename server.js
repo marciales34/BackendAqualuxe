@@ -11,6 +11,7 @@ const vehiculosRoutes = require("./routes/vehiculos");
 const path = require('path');
 const autolavadosRoutes = require("./routes/autolavados");
 const servicioRoutes = require('./routes/servicios');
+const resrvaRoutes = require('./routes/reservacionVista');
 
 
 const app = express();
@@ -33,6 +34,7 @@ sequelize.sync()
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/usuarios", usuariosRoutes); 
 app.use("/reservaciones", reservacionesRoutes);
+app.use("/reserva", resrvaRoutes);
 app.use("/vehiculos", vehiculosRoutes); 
 app.use("/usuarios", usuariosRoutes);
 app.use("/autolavados", autolavadosRoutes); // Asegúrate de que usuariosRoutes sea un router válido
