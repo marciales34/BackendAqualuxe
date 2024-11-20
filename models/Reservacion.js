@@ -1,4 +1,4 @@
-// models/Reservacion.js
+/*models/Reservacion.js
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../database");
 
@@ -61,3 +61,4 @@ Reservacion.init(
 );
 
 module.exports = Reservacion;
+*/
