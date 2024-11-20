@@ -8,7 +8,7 @@ router.post("/registrar", async (req, res) => {
     const { fecha, hora, servicio_id, vehiculo_id, usuario_id, autolavado_id } = req.body;
 
     // Validación de campos
-    if (!fecha || !hora || !servicio_id || !vehiculo_id || !usuario_id || !autolavado) {
+    if (!fecha || !hora || !servicio_id || !vehiculo_id || !usuario_id || !autolavado_id) {
       return res.status(400).json({ message: error });
     }
 

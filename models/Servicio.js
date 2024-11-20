@@ -6,7 +6,7 @@ class Servicio extends Model {}
 
 Servicio.init(
   {
-    id_servicios: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -26,6 +26,7 @@ Servicio.init(
   },
   {
     sequelize,
+    timestamps: false,
     modelName: "Servicio",
     tableName: "servicios",
   }

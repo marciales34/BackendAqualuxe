@@ -5,22 +5,23 @@ const router = express.Router();
 
 
 
-// Endpoint para registrar un vehículo
-router.post("/registrar", upload.single("imagen"), async (req, res) => {
+router.post("/registrar", async (req, res) => {
   try {
-    const { marca, tipo, modelo, placa, color, usuario_id } = req.body;
+    console.log("Cuerpo de la solicitud recibido:", req.body);
 
-    // Guarda la ruta de la imagen si se cargó
-    const imagenPath = req.file ? `/uploads/${req.file.filename}` : null;
+    const { marca, tipo, modelo, placa, color, usuario_id, imagenUrl } = req.body;
 
-    // Crear el vehículo en la base de datos
+    if (!imagenUrl) {
+      return res.status(400).json({ message: "La URL de la imagen es requerida" });
+    }
+
     const nuevoVehiculo = await Vehiculo.create({
       marca,
       tipo,
       modelo,
       placa,
       color,
-      imagen: imagenPath, // Guarda la ruta
+      imagen: imagenUrl,
       usuario_id,
     });
 
@@ -36,6 +37,8 @@ router.post("/registrar", upload.single("imagen"), async (req, res) => {
     });
   }
 });
+
+
 
 // Ruta para obtener todos los vehículos
 router.get("/obtener", async (req, res) => {
@@ -67,5 +70,27 @@ router.get("/obtener/:id", async (req, res) => {
     res.status(500).json({ message: "Error al obtener el vehículo.", error });
   }
 });
+
+router.get("/VehiculoCliente/:usuario_id", async (req, res) => {
+  try {
+    // Buscar los vehículos por el usuario_id
+    const vehiculos = await Vehiculo.findAll({
+      where: { usuario_id: req.params.usuario_id }, // Filtramos por usuario_id
+    });
+
+    if (vehiculos.length === 0) {
+      return res.status(404).json({ message: "No se encontraron vehículos para este usuario." });
+    }
+
+    res.status(200).json({
+      message: "Vehículos obtenidos exitosamente.",
+      data: vehiculos,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener los vehículos.", error });
+  }
+});
+
 
 module.exports = router;

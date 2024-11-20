@@ -24,6 +24,27 @@ router.post("/registrar", async (req, res) => {
     }
   });
   
+  // Obtener usuario por su ID
+router.get("/usuario/:id", async (req, res) => {
+  const { id } = req.params;  // Captura el id desde los parámetros de la URL
+
+  try {
+    // Buscar el usuario en la base de datos por su id
+    const usuario = await Usuario.findOne({ where: { id } });
+
+    if (!usuario) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    // Si el usuario existe, devolver sus datos
+    res.json(usuario);
+  } catch (err) {
+    console.error("Error al obtener el usuario:", err);
+    res.status(500).json({ error: "Error al obtener el usuario" });
+  }
+});
+
+  
   
 
 // Obtener todos los usuarios de la base de datos... 
@@ -60,11 +81,12 @@ router.post("/login", async (req, res) => {
           return res.status(401).json({ error: "Contraseña incorrecta" });
       }
 
-      // Si el inicio de sesión es exitoso, devolver el rol del usuario junto con el mensaje de éxito
+      // Si el inicio de sesión es exitoso, devolver el id y rol del usuario junto con el mensaje de éxito
       res.status(200).json({ 
           message: "Inicio de sesión exitoso", 
           usuario: { 
-              rol: usuario.rol 
+              id: usuario.id,   // Aquí añadimos el campo id
+              rol: usuario.rol  // El rol del usuario
           } 
       });
   } catch (err) {
@@ -72,6 +94,7 @@ router.post("/login", async (req, res) => {
       res.status(500).json({ error: "Error al iniciar sesión" });
   }
 });
+
 
   
   

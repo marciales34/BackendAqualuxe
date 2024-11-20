@@ -10,6 +10,7 @@ const reservacionesRoutes = require("./routes/reservaciones");
 const vehiculosRoutes = require("./routes/vehiculos");
 const path = require('path');
 const autolavadosRoutes = require("./routes/autolavados");
+const servicioRoutes = require('./routes/servicios');
 
 
 const app = express();
@@ -35,6 +36,7 @@ app.use("/reservaciones", reservacionesRoutes);
 app.use("/vehiculos", vehiculosRoutes); // Ruta para reservaciones
 app.use("/usuarios", usuariosRoutes);
 app.use("/autolavados", autolavadosRoutes); // Asegúrate de que usuariosRoutes sea un router válido
+app.use("/servicios", servicioRoutes);
 
 app.listen(PORT, '0.0.0.0',() => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
