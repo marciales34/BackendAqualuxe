@@ -95,8 +95,54 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.put("/editar-usuario/:id", async (req, res) => {
+  const { id } = req.params;
+  const { nombre, correo, password, telefono, direccion, ciudad } = req.body;
 
-  
+  try {
+      const usuario = await Usuario.findByPk(id);
+
+      if (!usuario) {
+          return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      // Actualizar los campos proporcionados
+      usuario.nombre = nombre || usuario.nombre;
+      usuario.correo = correo || usuario.correo;
+      usuario.password = password || usuario.password;
+      usuario.telefono = telefono || usuario.telefono;
+      usuario.ciudad = ciudad || usuario.ciudad;
+      usuario.direccion = direccion || usuario.direccion;
+
+      // Guardar los cambios en la base de datos
+      await usuario.save();
+
+      res.json({ message: "Usuario actualizado exitosamente", usuario });
+  } catch (err) {
+      console.error("Error al actualizar Usuario:", err);
+      res.status(500).json({ error: "Error al actualizar Usuario" });
+  }
+});
+
+router.get("/usuario/:id", async (req, res) => {
+  const { id } = req.params; // Obtener el ID del Usuario desde los parámetros
+
+  try {
+      // Buscar el Usuario por su ID
+      const usuario = await Usuario.findByPk(id);
+
+      // Verificar si el Usuario existe
+      if (!usuario) {
+          return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      // Responder con los datos del Usuario
+      res.json(usuario);
+  } catch (err) {
+      console.error("Error al obtener el Usuario:", err);
+      res.status(500).json({ error: "Error al obtener el Usuario" });
+  }
+}); 
   
 
 // Exportar el router

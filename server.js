@@ -31,9 +31,9 @@ sequelize.sync()
 // Servir archivos estáticos desde la carpeta uploads
 // Suponiendo que las imágenes se guardan en el directorio 'uploads'
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use("/usuarios", usuariosRoutes); // Asegúrate de que usuariosRoutes sea un router válido
+app.use("/usuarios", usuariosRoutes); 
 app.use("/reservaciones", reservacionesRoutes);
-app.use("/vehiculos", vehiculosRoutes); // Ruta para reservaciones
+app.use("/vehiculos", vehiculosRoutes); 
 app.use("/usuarios", usuariosRoutes);
 app.use("/autolavados", autolavadosRoutes); // Asegúrate de que usuariosRoutes sea un router válido
 app.use("/servicios", servicioRoutes);
