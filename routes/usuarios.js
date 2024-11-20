@@ -24,7 +24,10 @@ router.post("/registrar", async (req, res) => {
     }
   });
   
-  // Obtener usuario por su ID
+
+  
+
+/*   // Obtener usuario por su ID
 router.get("/usuario/:id", async (req, res) => {
   const { id } = req.params;  // Captura el id desde los parámetros de la URL
 
@@ -43,7 +46,7 @@ router.get("/usuario/:id", async (req, res) => {
     res.status(500).json({ error: "Error al obtener el usuario" });
   }
 });
-
+ */
   
   
 
